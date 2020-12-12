@@ -1,0 +1,77 @@
+$firstColor: #17252A; /* NAVY */
+$secondColor: #2B7A78; /* DARK TURQOISE */
+$thirdColor: #3AAFA9; /* TURQOISE */
+$fourthColor: #DEF2F1; /* PALE TURQOISE */
+$fifthColor: #FEFFFF; /* WHITE */
+
+
+@import "~bootstrap/scss/bootstrap";
+
+.container-fluid {
+  background-color: $thirdColor;
+}
+
+.groupName {
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  border-radius: 10px; 
+  padding-left: 10px;
+  margin-left: 20px;
+  color: $fifthColor;
+}
+
+.profile {
+	justify-self: center;
+  color: $fifthColor;
+  padding-left: 10px;
+}
+
+.addBill {
+	justify-self: center;
+
+  border-radius: 10px; 
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  padding: 20px;
+}
+
+.totalSplit {
+  background-color: $thirdColor; 
+  border-radius: 10px; 
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  padding: 10px;
+  color: $firstColor;
+}
+
+.owedList {
+  border-radius: 10px; 
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  padding: 20px;
+  color: $fifthColor;
+}
+
+.button {
+	border-radius: 5px;
+	background-color: $fourthColor;
+	color: $firstColor;
+}
+
+.splitList {
+	line-height: 1.5;
+}
+
+.billInput {
+	width: 100%;
+}
+
+.list-group-item {
+	padding: .5rem .75rem;
+	background-color: $fourthColor;
+  color: $firstColor;
+}
