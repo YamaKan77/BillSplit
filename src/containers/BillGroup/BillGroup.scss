@@ -16,8 +16,8 @@ $fifthColor: #FEFFFF; /* WHITE */
   border-style: solid;
   border-color: $firstColor;
   border-radius: 10px; 
-  padding-left: 10px;
-  margin-left: 20px;
+  padding: 10px;
+  margin-top: 10px;
   color: $fifthColor;
 }
 
@@ -74,4 +74,17 @@ $fifthColor: #FEFFFF; /* WHITE */
 	padding: .5rem .75rem;
 	background-color: $fourthColor;
   color: $firstColor;
+}
+
+/* Home Page */
+.groupList {
+  margin-left: 10px;
+}
+
+.addGroup {
+  margin-left: 10px;
+}
+
+.addButton {
+  margin-left: 10px;
 }

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
-import {
-  Link
-} from "react-router-dom";
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import Profile from '../Presentation/Profile';
+import { Link } from "react-router-dom";
+
+import '../BillGroup/BillGroup.scss';
 
 export class Home extends React.Component {
 	constructor(props) {
@@ -60,27 +61,31 @@ export class Home extends React.Component {
 
 	render() {
 		return(
-			<div className="container-fluid">
-				
-					{
-						this.state.groupList.map((group) => (
-							<div className="row">
-								<Link to={`/${group}`}>{group}</Link>
-							</div>
-					))}
-
-				<Form id="groupForm" inline>
-				 <Form.Row>
-				 	<Form.Label srOnly>New Group</Form.Label>
-					<Form.Control id="groupName" size="sm" type="text" placeholder="New Group" />
-				 </Form.Row>
- 				<Button 
-					variant="outline-dark" 
-					type="button"
-					onClick={this.handleAddGroup} >Add
-				</Button>
+			<Container fluid className="container-fluid">
+					<Row>
+						<Col><h1 className = "groupName" >Bill Split</h1></Col>
+						<Col md="auto"><Profile /></Col>
+					</Row>
+					<Row className="groupList">
+						{
+							this.state.groupList.map((group) => (
+								
+									<Link to={`/${group}`}>{group}</Link>
+								
+						))}
+					</Row>
+				<Form className="addGroup" id="groupForm" inline>
+					<Form.Row>
+						<Form.Label srOnly>New Group</Form.Label>
+						<Form.Control id="groupName" size="sm" type="text" placeholder="New Group" />
+					</Form.Row>
+	 				<Button className="addButton"
+						variant="outline-dark" 
+						type="button"
+						onClick={this.handleAddGroup} >Add
+					</Button>
 				</Form>
-			</div>
+			</Container>
 		);
 	}
 }

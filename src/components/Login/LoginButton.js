@@ -2,6 +2,8 @@ import React from "react";
 import * as Realm from "realm-web";
 import { useHistory } from "react-router-dom";
 
+import { Button } from 'react-bootstrap';
+
 
 export default function LoginEmailPassword({ setUser }) {
 	const REALM_APP_ID = "billsplit-enxhm"; // e.g. myapp-abcde
@@ -16,8 +18,6 @@ export default function LoginEmailPassword({ setUser }) {
 		try {
 			//Authenticate the user
 			const user = app.logIn(credentials);
-			// 'App.currentUser' update to match the logged in user
-			// assert(user.id === app.currentUser.id);
 			setUser(user);
 			history.push("/");
 		} catch(err) {
@@ -25,13 +25,19 @@ export default function LoginEmailPassword({ setUser }) {
 		}
 	}
 
+	function keyPress(e) {
+		if(e.keyCode === 13) {
+			AttemptLogin(setUser);
+		}
+	}
+
 	return (
 	<div>
 		<input type="text" id="email" placeholder="Email"/><br/>
-		<input type="text" id="password" placeholder="Password" /><br/>
-		<button onClick={() => {AttemptLogin(setUser)}}>
+		<input type="text" id="password" placeholder="Password" onKeyDown={keyPress} /><br/>
+		<Button onClick={() => {AttemptLogin(setUser)}}>
 		Log In
-		</button>
+		</Button>
 	</div>
 
 	);

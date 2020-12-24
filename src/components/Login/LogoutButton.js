@@ -1,6 +1,7 @@
 import React from "react";
 import * as Realm from "realm-web";
 import { useHistory } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 const LogoutButton = () => {
   const REALM_APP_ID = "billsplit-enxhm"; // e.g. myapp-abcde
@@ -15,9 +16,9 @@ const LogoutButton = () => {
 	}
 
   return (
-    <button onClick={() => logout()}>
+    <Button onClick={() => logout()}>
       Log Out
-    </button>
+    </Button>
   );
 };
 

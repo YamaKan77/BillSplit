@@ -5,6 +5,7 @@ import TotalSplit from '../Presentation/TotalSplit';
 import Profile from '../Presentation/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
 
 import './BillGroup.scss';
 
@@ -208,6 +209,7 @@ export class BillGroup extends React.Component {
 										billTo : billedTo[i],
 										billFrom : this.props.user.profile.email,
 										billAmount : billAmt.toFixed(2),
+										groupName : this.props.match.params.groupName,
 										_partition: 'Bill'
 									};
 
@@ -267,13 +269,13 @@ export class BillGroup extends React.Component {
 
 	render() {
 			return (
-				<div className="container-fluid">
-					<div className="row">
-						<h1 className = "col-sm-10 groupName" >{this.props.match.params.groupName}</h1>
-						<Profile className = "col-sm-2" />
-					</div>
+				<Container fluid className="container-fluid">
+					<Row className="row">
+						<Col><h1 className = "groupName" >{this.props.match.params.groupName}</h1></Col>
+						<Col md="auto"><Profile /></Col>
+					</Row>
 					<br/>
-					<div className="row" >
+					<Row className="row" >
 						<AddBill 	handleAdd={this.handleAdd} 
 										 	users={this.state.selectUserList ? this.state.selectUserList : []} 
 										 	currentUser={this.props.user.profile ? this.props.user.profile.email : ''}
@@ -286,9 +288,9 @@ export class BillGroup extends React.Component {
 						<OwedList className = "col-sm-3"
 											totalOwedBills = {this.state.totalOwedBills || {}}
 											user = {this.props.user.profile.email || {}} />
-					</div>
+					</Row>
 
-				</div>
+				</Container>
 			);
 	}
 

@@ -1,6 +1,5 @@
 import React from "react";
 
-import LoginButton from "./Login/LoginButton";
 import LogoutButton from "./Login/LogoutButton";
 
 const AuthenticationButton = () => {
