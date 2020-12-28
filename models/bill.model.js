@@ -1,6 +1,6 @@
 module.exports = mongoose => {
 	const Bill = mongoose.model(
-		"bill",
+		"Bill",
 		mongoose.Schema(
 			{
 				billFromId: String,
@@ -10,8 +10,7 @@ module.exports = mongoose => {
 				billAmount: Number,
 				groupName: String,
 				_partition: String,
-			},
-			{timestamps: true}
+			}
 		)
 	);
 

@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class BillDataService {
   getAll() {
-    return http.get("/bill");
+    return http.get("/");
   }
 
   get(id) {
@@ -25,9 +25,6 @@ class BillDataService {
     return http.delete(`/bill`);
   }
 
-  findByTitle(title) {
-    return http.get(`/bill?title=${title}`);
-  }
 }
 
 export default new BillDataService();

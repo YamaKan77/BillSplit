@@ -6,6 +6,7 @@ import Profile from '../Presentation/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
+import BillDataService from "../../services/bill.service.js";
 
 import './BillGroup.scss';
 
@@ -50,11 +51,22 @@ export class BillGroup extends React.Component {
 	}
 
 	setOwedBills() {
-		let billResult = Promise.resolve(this.getOwedBills());
-		let owedBills = Promise.resolve(billResult);
-		owedBills.then((v) => {
-			this.setState({ owedBills : v});
+
+		let body = {
+			email: this.props.user.profile.email,
+			groupName: this.props.match.params.groupName,
+		}
+		BillDataService.getAll().then(response => {
+			console.log(response.data);
 		})
+
+
+
+		// let billResult = Promise.resolve(this.getOwedBills());
+		// let owedBills = Promise.resolve(billResult);
+		// owedBills.then((v) => {
+		// 	this.setState({ owedBills : v});
+		// })
 	}
 
 

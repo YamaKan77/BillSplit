@@ -14,6 +14,7 @@ const REALM_APP_ID = "billsplit-enxhm";
 const app = new Realm.App({ id: REALM_APP_ID });
 
 
+
 function App() {
 	const [user, setUser] = React.useState(app.currentUser);
 
