@@ -1,16 +1,16 @@
 import http from "../http-common";
 
 class BillDataService {
-  getAll() {
-    return http.get("/");
+  getAll(data) {
+    return http.post(`/bills`, data);
   }
 
   get(id) {
     return http.get(`/bill/${id}`);
   }
 
-  create(data) {
-    return http.post("/bill", data);
+  insert(data) {
+    return http.post(`/bills/insert`, data);
   }
 
   update(id, data) {

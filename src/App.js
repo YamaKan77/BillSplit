@@ -5,7 +5,6 @@ import Home from './containers/Home/Home';
 import Login from './components/Login/LoginButton';
 import * as Realm from "realm-web";
 import {
-	BrowserRouter as Router,
 	Switch,
 	Route
 } from "react-router-dom";

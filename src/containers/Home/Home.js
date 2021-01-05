@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import Profile from '../Presentation/Profile';
 import { Link } from "react-router-dom";
+import GroupDataService from "../../services/group.service.js";
+
 
 import '../BillGroup/BillGroup.scss';
 
@@ -20,16 +22,14 @@ export class Home extends React.Component {
 	}
 
 	async getGroupList() {
-		const mongo = this.props.user.mongoClient("mongodb-atlas");
-		const mongoCollection = mongo.db("BillSplit").collection("Bills");
 
-		const queryFilter = { _partition: "userInfo" , name: this.props.user.profile.email};
-		const groupListResult = await mongoCollection.findOne(queryFilter);
-
-		let groupList = Promise.resolve(Promise.resolve(groupListResult));
-		groupList.then((groupObj) => {
-			this.setState({ groupList : groupObj.groupList });
+		let data = { user : this.props.user.profile.email};
+		GroupDataService.findUserGroups(data).then(response => {
+			let groups = response.data.map(function(group) { return group.groupName});
+			this.setState({ groupList : groups});
 		})
+
+
 	}
 
 	async handleAddGroup() {

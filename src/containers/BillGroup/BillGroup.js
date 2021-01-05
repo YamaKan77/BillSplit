@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import BillDataService from "../../services/bill.service.js";
+import GroupDataService from "../../services/group.service.js";
 
 import './BillGroup.scss';
 
@@ -19,54 +20,27 @@ export class BillGroup extends React.Component {
 		this.state = {selectedUsers : []};
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleUserSelect = this.handleUserSelect.bind(this);
-		this.setOwedBills = this.setOwedBills.bind(this);
+		this.getOwedBills = this.getOwedBills.bind(this);
+		this.getTotalOwed = this.getTotalOwed.bind(this);
 		this.handleSelectAll = this.handleSelectAll.bind(this);
 		this.handleSplitType = this.handleSplitType.bind(this);
 	}
 
 	async componentDidMount() {
-		this.setOwedBills();
-		this.getTotalOwed();
+		this.getOwedBills();
 		this.getUserList();
 	}
 
-	async getOwedBills() {
-		try {
-	    const mongo = this.props.user.mongoClient("mongodb-atlas");
-			const mongoCollection = mongo.db("BillSplit").collection("Bills");
-
-			const findManyQueryFilter = (
-					{ $and: [
-						{ $or: [{billFrom: this.props.user.profile.email}, {billTo: this.props.user.profile.email}] },
-						{ groupName: this.props.match.params.groupName}
-
-						]}
-				 );
-			const allowedBillsResult = await mongoCollection.find(findManyQueryFilter);
-
-			return allowedBillsResult;
-		} catch(error) {
-			console.log(error);
-		}
-	}
-
-	setOwedBills() {
+	getOwedBills() {
 
 		let body = {
 			email: this.props.user.profile.email,
 			groupName: this.props.match.params.groupName,
 		}
-		BillDataService.getAll().then(response => {
-			console.log(response.data);
+		BillDataService.getAll(body).then(response => {
+			this.setState({ owedBills : response.data}, function() { this.getTotalOwed()});
 		})
 
-
-
-		// let billResult = Promise.resolve(this.getOwedBills());
-		// let owedBills = Promise.resolve(billResult);
-		// owedBills.then((v) => {
-		// 	this.setState({ owedBills : v});
-		// })
 	}
 
 
@@ -139,51 +113,53 @@ export class BillGroup extends React.Component {
 		}
 	}
 
-	async getTotalOwed() {
-		const mongo = this.props.user.mongoClient("mongodb-atlas");
-		const mongoCollection = mongo.db("BillSplit").collection("Bills");
-
-		const findManyQueryFilter = { _partition: "Bill", groupName: this.props.match.params.groupName};
-		const allBillsResult = await mongoCollection.find(findManyQueryFilter);
-
-		let allBills = Promise.resolve(Promise.resolve(allBillsResult));
+	getTotalOwed() {
+		let allBills = this.state.owedBills;
 		let totalOwedBills = {};
-		allBills.then((bills) => {
-			bills.forEach(bill => {
-				// Check owed amounts for logged in user only
-				if(this.props.user.profile.email === bill.billFrom) {
-					this.calculateTotalOwedBills(bill, totalOwedBills, 'covered');
-				}
-				if(this.props.user.profile.email === bill.billTo) {
-					this.calculateTotalOwedBills(bill, totalOwedBills, 'owes');
-				}
-			});
-			this.setState({ totalOwedBills : totalOwedBills});
-		})
+		allBills.forEach(bill => {
+			// Check owed amounts for logged in user only
+			if(this.props.user.profile.email === bill.billFrom) {
+				this.calculateTotalOwedBills(bill, totalOwedBills, 'covered');
+			}
+			if(this.props.user.profile.email === bill.billTo) {
+				this.calculateTotalOwedBills(bill, totalOwedBills, 'owes');
+			}
+		});
+		this.setState({ totalOwedBills : totalOwedBills});
 	}
 
 	async getUserList() {
-		const mongo = this.props.user.mongoClient("mongodb-atlas");
-		const mongoCollection = mongo.db("BillSplit").collection("Bills");
+		// const mongo = this.props.user.mongoClient("mongodb-atlas");
+		// const mongoCollection = mongo.db("BillSplit").collection("Bills");
 
-		const queryFilter = { _partition: "group", groupName: this.props.match.params.groupName};
-		const groupResult = await mongoCollection.findOne(queryFilter);
+		// const queryFilter = { _partition: "Group", groupName: this.props.match.params.groupName};
+		// const groupResult = await mongoCollection.findOne(queryFilter);
 
-		let groupObject = Promise.resolve(Promise.resolve(groupResult));
-		groupObject.then((group) => {
-			this.setState({ allUsers : group.participants, selectUserList: group.participants});
-		})
+		// let groupObject = Promise.resolve(Promise.resolve(groupResult));
+		// groupObject.then((group) => {
+		// 	this.setState({ allUsers : group.participants, selectUserList: group.participants});
+		// })
+		let body = {
+			_partition: "Group",
+			groupName: this.props.match.params.groupName,
+		};
+		GroupDataService.findUserList(body).then(response => {
+			this.setState({ allUsers : response.data[0].participants, selectUserList: response.data[0].participants});
+		});
 	}
 
 
-	async insertBills(owedBills) {
+	async insertBills(newBills) {
 		try {
-			let user = this.props.user;
+			// let user = this.props.user;
 
-	    const mongo = user.mongoClient("mongodb-atlas");
-			const mongoCollection = mongo.db("BillSplit").collection("Bills");
+	  //   const mongo = user.mongoClient("mongodb-atlas");
+			// const mongoCollection = mongo.db("BillSplit").collection("Bills");
 
-			mongoCollection.insertMany(owedBills);
+			// mongoCollection.insertMany(newBills);
+
+
+			BillDataService.insert(newBills);
 			
 		} catch(error) {
 			console.log(error);
@@ -194,7 +170,7 @@ export class BillGroup extends React.Component {
 		// Prevent the page from refreshing
 		// event.preventDefault();
 		let billName = document.getElementById("billName").value;
-		let billAmt = document.getElementById("billAmt").value;
+		let billAmt = parseInt(document.getElementById("billAmt").value);
 		let billedTo = this.state.selectedUsers;
 		let splitType = document.getElementById("splitType").value;
 

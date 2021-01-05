@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const path = __dirname + '/build/';
 const app = express();
 
 var corsOptions = {
@@ -34,11 +35,12 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "VERY NICe" });
+  res.sendFile(path + "index.html");
 });
 
 // set port, listen for requests
 require("./routes/bill.routes")(app);
+require("./routes/group.routes")(app);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

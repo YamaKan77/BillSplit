@@ -7,5 +7,6 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.bills = require("./bill.model.js")(mongoose);
+db.groups = require("./group.model.js")(mongoose);
 
 module.exports = db;
