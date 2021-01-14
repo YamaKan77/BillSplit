@@ -9,7 +9,7 @@ exports.insert = (req, res) => {
     return;
   }
 
-  Bill.insertMany(req.body).then(data => {
+  Group.insertMany(req.body).then(data => {
   	res.send(data);
   })
   .catch(err => {
@@ -48,7 +48,7 @@ exports.findUserGroups = (req, res) => {
     return;
   }
   let user = req.body.user;
-  var condition = { _partition: "Group", participants: user};
+  let condition = { _partition: "Group", participants: user};
 
   Group.find(condition).then(data => {
     res.send(data);
@@ -63,7 +63,17 @@ exports.findUserGroups = (req, res) => {
 
 // Update a Bill by the id in the request
 exports.update = (req, res) => {
-  
+  if (!req.body) {
+    res.status(400).send({ message: "Content can not be empty!" });
+    return;
+  }
+
+  let condition = { _partition: "Group", groupName: req.body.groupName};
+  Group.findOneAndUpdate(condition, { participants: req.body.participants }).then(data => {
+    console.log(data);
+    res.send(data);
+  });
+
 };
 
 // Delete a Bill with the specified id in the request

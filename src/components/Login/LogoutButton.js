@@ -16,7 +16,7 @@ const LogoutButton = () => {
 	}
 
   return (
-    <Button onClick={() => logout()}>
+    <Button onClick={() => logout()} size="sm">
       Log Out
     </Button>
   );

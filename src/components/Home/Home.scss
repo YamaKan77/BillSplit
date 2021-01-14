@@ -1,0 +1,57 @@
+$firstColor: #17252A; /* NAVY */
+$secondColor: #2B7A78; /* DARK TURQOISE */
+$thirdColor: #3AAFA9; /* TURQOISE */
+$fourthColor: #DEF2F1; /* PALE TURQOISE */
+$fifthColor: #FEFFFF; /* WHITE */
+
+
+@import "~bootstrap/scss/bootstrap";
+
+.container-fluid {
+  background-color: $thirdColor;
+}
+
+.groupList {
+  margin-left: 30px;
+}
+
+.addGroup {
+  margin-left: 10px;
+}
+
+.addButton {
+  margin-left: 10px;
+}
+
+.groupName {
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  border-radius: 10px; 
+  padding: 10px;
+  margin-top: 10px;
+  color: $fifthColor;
+}
+
+#groupName {
+	width: 70%;
+}
+
+.groupInput {
+	border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  border-radius: 10px; 
+  padding: 10px;	
+  margin-top: 10px;
+  text-align: left;
+}
+
+.groupContainer {
+	justify-content: center;
+  padding-left: 10px;
+}
+
+.groupNameCol {
+	padding-right: 0px;
+}

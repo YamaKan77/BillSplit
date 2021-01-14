@@ -8,5 +8,9 @@ module.exports = app => {
 
 	router.post("/getGroups", groups.findUserGroups);
 
+	router.post("/insert", groups.insert);
+
+	router.post("/update", groups.update);
+
   app.use('/api/groups', router);
 };

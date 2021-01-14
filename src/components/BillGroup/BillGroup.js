@@ -1,18 +1,18 @@
 import React from 'react';
-import AddBill from '../Presentation/AddBill';
-import OwedList from '../Presentation/OwedList';
-import TotalSplit from '../Presentation/TotalSplit';
-import Profile from '../Presentation/Profile';
+import AddBill from '../AddBill';
+import OwedList from '../OwedList';
+import TotalSplit from '../TotalSplit';
+import Profile from '../Profile';
+import InviteUser from '../InviteUser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router-dom";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import BillDataService from "../../services/bill.service.js";
 import GroupDataService from "../../services/group.service.js";
 
 import './BillGroup.scss';
 
 export class BillGroup extends React.Component {
-
 
 	constructor(props) {
 		super(props);
@@ -24,6 +24,7 @@ export class BillGroup extends React.Component {
 		this.getTotalOwed = this.getTotalOwed.bind(this);
 		this.handleSelectAll = this.handleSelectAll.bind(this);
 		this.handleSplitType = this.handleSplitType.bind(this);
+		this.handleInviteUser = this.handleInviteUser.bind(this);
 	}
 
 	async componentDidMount() {
@@ -129,16 +130,7 @@ export class BillGroup extends React.Component {
 	}
 
 	async getUserList() {
-		// const mongo = this.props.user.mongoClient("mongodb-atlas");
-		// const mongoCollection = mongo.db("BillSplit").collection("Bills");
 
-		// const queryFilter = { _partition: "Group", groupName: this.props.match.params.groupName};
-		// const groupResult = await mongoCollection.findOne(queryFilter);
-
-		// let groupObject = Promise.resolve(Promise.resolve(groupResult));
-		// groupObject.then((group) => {
-		// 	this.setState({ allUsers : group.participants, selectUserList: group.participants});
-		// })
 		let body = {
 			_partition: "Group",
 			groupName: this.props.match.params.groupName,
@@ -151,13 +143,6 @@ export class BillGroup extends React.Component {
 
 	async insertBills(newBills) {
 		try {
-			// let user = this.props.user;
-
-	  //   const mongo = user.mongoClient("mongodb-atlas");
-			// const mongoCollection = mongo.db("BillSplit").collection("Bills");
-
-			// mongoCollection.insertMany(newBills);
-
 
 			BillDataService.insert(newBills);
 			
@@ -179,8 +164,7 @@ export class BillGroup extends React.Component {
 		// Change bill amount depending on split type
 		if(splitType === "Split Bill Amount") {
 			if(billedTo.includes(user.profile.email)) {
-				let splitBy = billedTo.length - 1;
-				billAmt = billAmt / splitBy;
+				billAmt = billAmt / billedTo.length;
 				billedTo = billedTo.filter(user => user !== this.props.user.profile.email);
 			} else {
 				billAmt = billAmt / billedTo.length;
@@ -255,15 +239,38 @@ export class BillGroup extends React.Component {
 		}
 	}
 
+	handleInviteUser() {
+		let allUsers = this.state.allUsers;
+		let email = document.getElementById("email").value;
+
+		if(!allUsers.includes(email)) {
+			allUsers.push(email);
+
+			let body = {
+				groupName: this.props.match.params.groupName,
+				participants : allUsers
+			}
+			GroupDataService.update(body);
+
+			this.setState({allUsers: allUsers});
+
+			document.getElementById("emailForm").reset();
+		}
+
+
+	}
+
 	render() {
 			return (
 				<Container fluid className="container-fluid">
-					<Row className="row">
-						<Col><h1 className = "groupName" >{this.props.match.params.groupName}</h1></Col>
+					<Row>
+						<Col className = "groupNameContainer">
+							<InviteUser groupName={this.props.match.params.groupName} handleInviteUser={this.handleInviteUser}  />
+						</Col>
 						<Col md="auto"><Profile /></Col>
 					</Row>
 					<br/>
-					<Row className="row" >
+					<Row>
 						<AddBill 	handleAdd={this.handleAdd} 
 										 	users={this.state.selectUserList ? this.state.selectUserList : []} 
 										 	currentUser={this.props.user.profile ? this.props.user.profile.email : ''}

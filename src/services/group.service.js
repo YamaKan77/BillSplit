@@ -13,8 +13,8 @@ class GroupDataService {
     return http.post(`/groups/insert`, data);
   }
 
-  update(id, data) {
-    return http.put(`/groups/${id}`, data);
+  update(data) {
+    return http.post(`/groups/update`, data);
   }
 
   delete(id) {

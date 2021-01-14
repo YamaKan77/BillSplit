@@ -4,8 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { Button } from 'react-bootstrap';
 
-
-export default function LoginEmailPassword({ setUser }) {
+export default function LoginButton({ setUser }) {
 	const REALM_APP_ID = "billsplit-enxhm"; // e.g. myapp-abcde
 	const app = new Realm.App({ id: REALM_APP_ID });
 	const history = useHistory();
@@ -13,13 +12,19 @@ export default function LoginEmailPassword({ setUser }) {
   function AttemptLogin(setUser) {
 		let email = document.getElementById('email').value;
 		let password = document.getElementById('password').value;
-		const credentials = Realm.Credentials.emailPassword(email, password);
+		
+		loginEmailPassword(email, password).then(user => {
+			history.push("/");
+		})
 
+	}
+
+	async function loginEmailPassword(email, password) {
+		const credentials = Realm.Credentials.emailPassword(email, password);
 		try {
 			//Authenticate the user
-			const user = app.logIn(credentials);
+			const user = await app.logIn(credentials);
 			setUser(user);
-			history.push("/");
 		} catch(err) {
 			console.error("Failed log in", err);
 		}
@@ -31,12 +36,22 @@ export default function LoginEmailPassword({ setUser }) {
 		}
 	}
 
+	async function SignUp() {
+		let email = document.getElementById('email').value;
+		let password = document.getElementById('password').value;
+
+		await app.emailPasswordAuth.registerUser(email, password);
+	}
+
 	return (
 	<div>
 		<input type="text" id="email" placeholder="Email"/><br/>
 		<input type="text" id="password" placeholder="Password" onKeyDown={keyPress} /><br/>
 		<Button onClick={() => {AttemptLogin(setUser)}}>
 		Log In
+		</Button>
+		<Button onClick={() => {SignUp()}}>
+			Sign Up
 		</Button>
 	</div>
 

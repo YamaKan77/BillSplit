@@ -11,7 +11,7 @@ $fifthColor: #FEFFFF; /* WHITE */
   background-color: $thirdColor;
 }
 
-.groupName {
+.groupNameContainer {
   border-width: 3px;
   border-style: solid;
   border-color: $firstColor;
@@ -19,6 +19,10 @@ $fifthColor: #FEFFFF; /* WHITE */
   padding: 10px;
   margin-top: 10px;
   color: $fifthColor;
+}
+
+.groupNameHeader {
+  width : 70%;
 }
 
 .profile {
@@ -67,7 +71,7 @@ $fifthColor: #FEFFFF; /* WHITE */
 }
 
 .billInput {
-	width: 100%;
+	width: 100px;
 }
 
 .list-group-item {
@@ -76,15 +80,16 @@ $fifthColor: #FEFFFF; /* WHITE */
   color: $firstColor;
 }
 
-/* Home Page */
-.groupList {
-  margin-left: 10px;
+#invite-button {
+  float: right;
+  vertical-align: middle;
 }
 
-.addGroup {
-  margin-left: 10px;
+.emailInvite {
+
 }
 
-.addButton {
-  margin-left: 10px;
+
+.idCol {
+  padding-right: 5px;
 }

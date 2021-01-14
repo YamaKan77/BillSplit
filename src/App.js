@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import BillGroup from './containers/BillGroup/BillGroup';
-import Home from './containers/Home/Home';
+import BillGroup from './components/BillGroup/BillGroup';
+import Home from './components/Home/Home';
 import Login from './components/Login/LoginButton';
 import * as Realm from "realm-web";
 import {

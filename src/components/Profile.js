@@ -1,6 +1,6 @@
 import React from "react";
 import * as Realm from "realm-web";
-import AuthenticationButton from '../../components/AuthenticationButton';
+import LogoutButton from './Login/LogoutButton';
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
@@ -15,9 +15,9 @@ const Profile = () => {
       <div className = "profile" >
         <h4>{user.name}</h4>
         <p>{user.profile.email}</p>
-        <AuthenticationButton /> 
+        <LogoutButton /> 
         <Link to="/">
-          <Button type="button">
+          <Button type="button" size="sm">
             Home
           </Button>
         </Link>
