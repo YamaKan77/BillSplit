@@ -6,14 +6,19 @@ import GroupDataService from "../../services/group.service.js";
 import { Formik} from 'formik';
 import * as Yup from "yup";
 import AddGroup from '../AddGroup';
+import * as Realm from "realm-web";
 
 import './Home.scss';
+
+const REALM_APP_ID = "billsplit-enxhm"; 
+const app = new Realm.App({ id: REALM_APP_ID });
 
 export class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			groupList: [],
+			user: app.currentUser,
 		};
 		this.getGroupList = this.getGroupList.bind(this);
 		this.handleAddGroup = this.handleAddGroup.bind(this);
@@ -25,7 +30,7 @@ export class Home extends React.Component {
 
 	getGroupList() {
 
-		let data = { user : this.props.user.profile.email};
+		let data = { user : this.state.user.profile.email};
 		GroupDataService.findUserGroups(data).then(response => {
 			let groups = response.data.map(function(group) { return group.groupName});
 			this.setState({ groupList : groups});
@@ -40,7 +45,7 @@ export class Home extends React.Component {
 		let groupList = this.state.groupList;
 		groupList.push(groupName);
 
-		let participants = [this.props.user.profile.email];
+		let participants = [this.state.user.profile.email];
 
 		let data = {
 			_partition : "Group",

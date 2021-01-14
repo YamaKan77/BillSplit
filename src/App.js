@@ -6,31 +6,30 @@ import Login from './components/Login/LoginButton';
 import * as Realm from "realm-web";
 import {
 	Switch,
-	Route
+	Route,
+	Redirect
 } from "react-router-dom";
 
 const REALM_APP_ID = "billsplit-enxhm"; 
 const app = new Realm.App({ id: REALM_APP_ID });
 
-
-
 function App() {
 	const [user, setUser] = React.useState(app.currentUser);
 
-
+	const PrivateRoute = ({ user, ...props }) => 
+		user ? <Route {...props} /> : <Redirect to="/login"/>;
+	
 	return (
 		<div className="App">
 			<Switch>
-				<Route path="/Login">
+				<Route path="/login">
 					<Login setUser={setUser} />
 				</Route>
+				<PrivateRoute user={user} path="/" component={Home} />
 				<Route path="/:groupName">
 					<BillGroup user={user} />
 				</Route>
-				<Route path="/">
-					<Home user={user} />
-				</Route>
-			
+
 			</Switch>
 		</div>
 	);
