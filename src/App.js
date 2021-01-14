@@ -25,11 +25,10 @@ function App() {
 				<Route path="/login">
 					<Login setUser={setUser} />
 				</Route>
-				<PrivateRoute user={user} path="/" component={Home} />
 				<Route path="/:groupName">
 					<BillGroup user={user} />
 				</Route>
-
+				<PrivateRoute user={user} path="/" component={Home} />
 			</Switch>
 		</div>
 	);
