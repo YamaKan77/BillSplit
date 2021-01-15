@@ -72,15 +72,16 @@ export default function AddBill({handleAdd, users, currentUser, selectedUsers, h
 		        	<option>Charge Each Amount</option>
 		        </Form.Control>
 		        <UserList name="selectedUsers" id="selectedUsers" value={values.selectedUsers} users = {users} currentUser={currentUser} selectedUsers={selectedUsers} handleUserSelect={handleUserSelect}/>
-		      	<Button variant="outline-dark" 
-		      					type="submit" 
-		      					className="button">
+		      	<Button type="submit" 
+		      					className="button"
+		      					size="sm"
+		      					style={{backgroundColor: '#3b8beb'}}>
 						Add
 						</Button>
-		      	<Button variant="outline-dark" 
-		      					type="button" 
+		      	<Button type="button" 
 		      					onClick={handleSelectAll} 
-		      					className="button">
+		      					size="sm"
+		      					style={{backgroundColor: '#3b8beb'}}>
 						{(users.length === selectedUsers.length) ? "Clear" : "Select All"}
 						</Button>
 		      </Form>

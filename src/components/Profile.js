@@ -12,12 +12,12 @@ const Profile = () => {
 
   return (
     user && (
-      <div className = "profile" >
+      <div className = "profile pull-right" >
         <h4>{user.name}</h4>
         <p>{user.profile.email}</p>
         <LogoutButton /> 
         <Link to="/">
-          <Button type="button" size="sm">
+          <Button className="profile-button" type="button" size="sm">
             Home
           </Button>
         </Link>

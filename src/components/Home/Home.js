@@ -1,11 +1,12 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, CardGroup } from 'react-bootstrap';
 import Profile from '../Profile';
 import { Link } from "react-router-dom";
 import GroupDataService from "../../services/group.service.js";
 import AddGroup from '../AddGroup';
+import GroupCard from './GroupCard.js';
 import * as Realm from "realm-web";
-import icon from "../../assets/Divvy Up.png";
+import icon from "../../assets/Divy Up.png";
 
 import './Home.scss';
 
@@ -34,8 +35,6 @@ export class Home extends React.Component {
 			let groups = response.data.map(function(group) { return group.groupName});
 			this.setState({ groupList : groups});
 		})
-
-
 	}
 
 	handleAddGroup() {
@@ -64,22 +63,20 @@ export class Home extends React.Component {
 		return(
 			<Container fluid>
 					<Row>
-						<Col md="auto"><img className="icon" src={icon}/></Col>
-						<Col className="groupNameCol"><h1 className="groupName">Divvy Up</h1></Col>
+						<Col md="auto"><img className="icon" src={icon} alt="Logo icon" /></Col>
+						<Col className="groupNameCol"><h1 className="groupName">Divy Up</h1></Col>
 						<Col md={2}><Profile /></Col>
 					</Row>
-					<Row>
-						<Col >
-							<div className="groupList">
-								{
-									this.state.groupList.map((group) => (
-										<Row>
-											<Link to={`/${group}`}>{group}</Link>
-										</Row>
-								))}
-							</div>
-						</Col>
-						<Col className="groupInput" md={2}><AddGroup handleAddGroup={this.handleAddGroup} /></Col>
+					<Row className="groupList">
+						<CardGroup className="cardGroup" >
+							{
+								this.state.groupList.map((group) => (
+									
+										<GroupCard group={group} />
+									
+							))}
+						</CardGroup>
+						<Col className="groupInput ml-auto" ><AddGroup handleAddGroup={this.handleAddGroup} /></Col>
 					</Row>
 			</Container>
 		);

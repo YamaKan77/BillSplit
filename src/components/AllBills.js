@@ -4,7 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 
 export default function AllBills({ owedBills }) {
 	return (
-		<div className="totalSplit col-sm-6">
+		<div className="allBills col-sm-6">
 			<ListGroup className="splitList">
 				{
 					owedBills ? owedBills.map((bill, index) => (

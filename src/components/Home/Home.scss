@@ -13,7 +13,7 @@ $fifthColor: #b23850; /* Red */
 }
 
 .groupList {
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .addGroup {
@@ -40,12 +40,13 @@ $fifthColor: #b23850; /* Red */
 }
 
 .groupInput {
+  width: 15rem;
+  height: 150px;
 	border-width: 3px;
   border-style: solid;
   border-color: $firstColor;
   border-radius: 10px; 
   padding: 10px;	
-  margin-top: 10px;
   text-align: left;
 }
 
@@ -62,4 +63,20 @@ $fifthColor: #b23850; /* Red */
   height: 75px;
   width: 75px;
   margin-top: 10px;
+}
+
+.profile-button {
+  background-color: $secondColor;
+}
+
+.groupCard {
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  border-radius: 10px; 
+  text-align: center;
+}
+
+.cardGroup {
+  width: 85%;
 }

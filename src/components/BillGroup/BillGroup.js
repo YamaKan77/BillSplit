@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import BillDataService from "../../services/bill.service.js";
 import GroupDataService from "../../services/group.service.js";
-import icon from "../../assets/Divvy Up.png";
+import icon from "../../assets/Divy Up.png";
 
 import './BillGroup.scss';
 
@@ -18,7 +18,9 @@ export class BillGroup extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {selectedUsers : []};
+		this.state = {	selectedUsers : [],
+										cardImg : null,
+									};
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleUserSelect = this.handleUserSelect.bind(this);
 		this.getOwedBills = this.getOwedBills.bind(this);
@@ -26,6 +28,7 @@ export class BillGroup extends React.Component {
 		this.handleSelectAll = this.handleSelectAll.bind(this);
 		this.handleSplitType = this.handleSplitType.bind(this);
 		this.handleInviteUser = this.handleInviteUser.bind(this);
+		this.handleFileUpload = this.handleFileUpload.bind(this);
 	}
 
 	async componentDidMount() {
@@ -257,9 +260,15 @@ export class BillGroup extends React.Component {
 
 			document.getElementById("emailForm").reset();
 		}
+	}
 
+	handleFileUpload = event => {
+		let file = event.target.files[0];
+		console.log(file);
+		this.state({ cardImg: file});
 
 	}
+
 
 	render() {
 			return (
@@ -267,7 +276,9 @@ export class BillGroup extends React.Component {
 					<Row>
 						<Col md="auto"><img className="icon" src={icon}/></Col>
 						<Col className = "groupNameContainer">
-							<InviteUser groupName={this.props.match.params.groupName} handleInviteUser={this.handleInviteUser}  />
+							<InviteUser groupName={this.props.match.params.groupName} 
+													handleInviteUser={this.handleInviteUser}
+													handleFileUpload={this.handleFileUpload}   />
 						</Col>
 						<Col md="auto"><Profile /></Col>
 					</Row>
