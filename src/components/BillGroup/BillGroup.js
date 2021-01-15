@@ -1,7 +1,7 @@
 import React from 'react';
 import AddBill from '../AddBill';
-import OwedList from '../OwedList';
-import TotalSplit from '../TotalSplit';
+import OwedAmount from '../OwedAmount';
+import AllBills from '../AllBills';
 import Profile from '../Profile';
 import InviteUser from '../InviteUser';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import BillDataService from "../../services/bill.service.js";
 import GroupDataService from "../../services/group.service.js";
+import icon from "../../assets/Divvy Up.png";
 
 import './BillGroup.scss';
 
@@ -262,8 +263,9 @@ export class BillGroup extends React.Component {
 
 	render() {
 			return (
-				<Container fluid className="container-fluid">
+				<Container fluid>
 					<Row>
+						<Col md="auto"><img className="icon" src={icon}/></Col>
 						<Col className = "groupNameContainer">
 							<InviteUser groupName={this.props.match.params.groupName} handleInviteUser={this.handleInviteUser}  />
 						</Col>
@@ -278,9 +280,9 @@ export class BillGroup extends React.Component {
 										 	handleUserSelect={this.handleUserSelect}
 										 	handleSelectAll={this.handleSelectAll}
 										 	handleSplitType={this.handleSplitType}/>
-						<TotalSplit className = "col-sm-6"
+						<AllBills className = "col-sm-6"
 												owedBills={this.state.owedBills} />
-						<OwedList className = "col-sm-3"
+						<OwedAmount className = "col-sm-3"
 											totalOwedBills = {this.state.totalOwedBills || {}}
 											user = {this.props.user.profile.email || {}} />
 					</Row>

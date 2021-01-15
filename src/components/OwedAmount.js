@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function OwedList({ totalOwedBills, user }) {
+export default function OwedAmount({ totalOwedBills, user }) {
 	const covered = totalOwedBills[user] && totalOwedBills[user].covered ? totalOwedBills[user].covered : new Map();
 	const owes = totalOwedBills[user] && totalOwedBills[user].owes ? totalOwedBills[user].owes : new Map();
 	let listItems = [];

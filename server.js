@@ -6,7 +6,7 @@ const path = __dirname + '/build/';
 const app = express();
 
 var corsOptions = {
-  origin: "https://sleepy-reaches-94594.herokuapp.com"
+  origin: "https://divyup.herokuapp.com"
 };
 
 app.use(express.static(path));

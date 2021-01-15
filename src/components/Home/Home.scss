@@ -1,8 +1,9 @@
-$firstColor: #17252A; /* NAVY */
-$secondColor: #2B7A78; /* DARK TURQOISE */
-$thirdColor: #3AAFA9; /* TURQOISE */
-$fourthColor: #DEF2F1; /* PALE TURQOISE */
-$fifthColor: #FEFFFF; /* WHITE */
+$firstColor: #8590aa; /* Grey */
+$secondColor: #3b8beb; /* Blue */
+$thirdColor: #e7e3d4; /* Off White */
+/* Secondary Colors */
+$fourthColor: #c4dbf6; /* light cyan */
+$fifthColor: #b23850; /* Red */
 
 
 @import "~bootstrap/scss/bootstrap";
@@ -30,7 +31,8 @@ $fifthColor: #FEFFFF; /* WHITE */
   border-radius: 10px; 
   padding: 10px;
   margin-top: 10px;
-  color: $fifthColor;
+  color: $secondColor;
+  font-family: Sarpanch;
 }
 
 #groupName {
@@ -54,4 +56,10 @@ $fifthColor: #FEFFFF; /* WHITE */
 
 .groupNameCol {
 	padding-right: 0px;
+}
+
+.icon {
+  height: 75px;
+  width: 75px;
+  margin-top: 10px;
 }

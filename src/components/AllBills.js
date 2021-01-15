@@ -2,7 +2,7 @@ import React from "react";
 
 import { ListGroup } from 'react-bootstrap';
 
-export default function TotalSplit({ owedBills }) {
+export default function AllBills({ owedBills }) {
 	return (
 		<div className="totalSplit col-sm-6">
 			<ListGroup className="splitList">

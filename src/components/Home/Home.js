@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Profile from '../Profile';
 import { Link } from "react-router-dom";
 import GroupDataService from "../../services/group.service.js";
-import { Formik} from 'formik';
-import * as Yup from "yup";
 import AddGroup from '../AddGroup';
 import * as Realm from "realm-web";
+import icon from "../../assets/Divvy Up.png";
 
 import './Home.scss';
 
@@ -65,7 +64,8 @@ export class Home extends React.Component {
 		return(
 			<Container fluid>
 					<Row>
-						<Col className="groupNameCol"><h1 className="groupName" >Bill Split</h1></Col>
+						<Col md="auto"><img className="icon" src={icon}/></Col>
+						<Col className="groupNameCol"><h1 className="groupName">Divvy Up</h1></Col>
 						<Col md={2}><Profile /></Col>
 					</Row>
 					<Row>
