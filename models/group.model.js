@@ -5,7 +5,7 @@ module.exports = mongoose => {
 			{
 				groupName: String,
 				participants: [String],
-				img: { data: Buffer, contentType: String},
+				img: { type: String},
 				_partition: String,
 			}
 		)

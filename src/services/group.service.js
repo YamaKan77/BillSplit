@@ -17,12 +17,8 @@ class GroupDataService {
     return http.post(`/groups/update`, data);
   }
 
-  delete(id) {
-    return http.delete(`/groups/${id}`);
-  }
-
-  deleteAll() {
-    return http.delete(`/groups`);
+  upload(data) {
+    return http.post(`/groups/upload`, data);
   }
 
 }

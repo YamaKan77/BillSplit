@@ -264,8 +264,11 @@ export class BillGroup extends React.Component {
 
 	handleFileUpload = event => {
 		let file = event.target.files[0];
-		console.log(file);
-		this.state({ cardImg: file});
+
+		const formData = new FormData();
+		formData.append('img', file);
+		formData.append('groupName', this.props.match.params.groupName);
+		GroupDataService.upload(formData);
 
 	}
 

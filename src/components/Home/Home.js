@@ -32,7 +32,7 @@ export class Home extends React.Component {
 
 		let data = { user : this.state.user.profile.email};
 		GroupDataService.findUserGroups(data).then(response => {
-			let groups = response.data.map(function(group) { return group.groupName});
+			let groups = response.data.map(function(group) { return group});
 			this.setState({ groupList : groups});
 		})
 	}
@@ -48,7 +48,8 @@ export class Home extends React.Component {
 		let data = {
 			_partition : "Group",
 			groupName : groupName,
-			participants : participants
+			participants : participants,
+			img : "",
 		}
 
 		GroupDataService.insert(data).then(response => {

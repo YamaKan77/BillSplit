@@ -70,18 +70,18 @@ exports.update = (req, res) => {
 
   let condition = { _partition: "Group", groupName: req.body.groupName};
   Group.findOneAndUpdate(condition, { participants: req.body.participants }).then(data => {
-    console.log(data);
     res.send(data);
   });
 
 };
 
-// Delete a Bill with the specified id in the request
-exports.delete = (req, res) => {
+// Upload image for card overlay
+exports.upload = (req, res, next) => {
+  const url = req.protocol + '://' + req.get('host');
+  let condition = { _partition: "Group", groupName: req.body.groupName};
+  let img = url + '/public/' + req.file.filename;
+  Group.findOneAndUpdate(condition, { img: img}).then(data => {
+    res.send(data);
+  })
   
-};
-
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-  
-};
+}

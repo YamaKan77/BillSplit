@@ -11,6 +11,8 @@ var corsOptions = {
 
 app.use(express.static(path));
 
+app.use('/public', express.static(__dirname + '/public'));
+
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
