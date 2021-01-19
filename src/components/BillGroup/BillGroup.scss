@@ -92,3 +92,19 @@ $fifthColor: #b23850; /* Red */
 .profile-button {
   background-color: $secondColor;
 }
+
+.groupImage {
+  height:100%;
+}
+
+/* login */
+.loginContainer {
+  min-height: 100vh;
+  max-width: 2000px;
+  margin: auto;
+}
+
+.homeIcon {
+  height: 200px;
+  width: 200px;
+}

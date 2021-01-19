@@ -11,7 +11,7 @@ export default function GroupCard({ group }) {
   return (
   	<Link to={`/${group.groupName}`}>
   		<Card className="groupCard" >
-  			<Card.Img fluid src={img} alt="Card image" />
+  			<Card.Img className="groupImage" src={img} alt="Card image" />
   			<Card.ImgOverlay>
 	  			<Card.Body>
 	  				<Card.Title>{group.groupName}</Card.Title>

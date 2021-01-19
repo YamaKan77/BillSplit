@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import BillGroup from './components/BillGroup/BillGroup';
 import Home from './components/Home/Home';
-import Login from './components/Login/LoginButton';
+import Login from './components/Login/Login';
 import * as Realm from "realm-web";
 import {
 	Switch,
