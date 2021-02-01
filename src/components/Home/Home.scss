@@ -25,23 +25,14 @@ $fifthColor: #b23850; /* Red */
 }
 
 .groupName {
-  border-width: 3px;
-  border-style: solid;
-  border-color: $firstColor;
-  border-radius: 10px; 
   padding: 10px;
   margin-top: 10px;
   color: $secondColor;
   font-family: Sarpanch;
 }
 
-#groupName {
-	width: 70%;
-}
-
 .groupInput {
   width: 15rem;
-  height: 150px;
 	border-width: 3px;
   border-style: solid;
   border-color: $firstColor;
@@ -51,11 +42,22 @@ $fifthColor: #b23850; /* Red */
 }
 
 .groupContainer {
+  width: 15rem;
 	justify-content: center;
   padding-left: 10px;
 }
 
+.addGroup {
+  height: 100%;
+  
+}
+
 .groupNameCol {
+  display:flex;
+  border-width: 3px;
+  border-style: solid;
+  border-color: $firstColor;
+  border-radius: 10px; 
 	padding-right: 0px;
 }
 

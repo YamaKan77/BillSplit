@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Formik} from 'formik';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 import * as Yup from "yup";
 
 export default function AddGroup({handleAddGroup}) {
@@ -36,22 +36,29 @@ export default function AddGroup({handleAddGroup}) {
 		      			autoComplete="off" 
 		      			onSubmit={handleSubmit} 
 		      			id="groupForm">
-		        <Form.Label>Group Name</Form.Label>
-		        <Form.Control 
-		        	id="groupName"
-		        	name="groupName"
-		        	type="text" 
-		        	onChange={handleChange}
-		        	onBlur={handleBlur}
-		        	value={values.groupName}
-		        	isValid={!errors.groupName}
-		        	size="sm"/>
-		        	{errors.groupName && <div>{errors.groupName}</div>}
-		      	<Button variant="outline-dark" 
-		      					type="submit" 
-		      					className="button">
-						Add
-						</Button>
+		      	<Row>
+			      	<Col>
+			        <Form.Control 
+			        	id="groupName"
+			        	name="groupName"
+			        	type="text" 
+			        	onChange={handleChange}
+			        	onBlur={handleBlur}
+			        	value={values.groupName}
+			        	isValid={!errors.groupName}
+			        	placeholder="Group Name"
+			        	size="sm"/>
+			        	{errors.groupName && <div>{errors.groupName}</div>}
+			      	</Col>
+			      	<Col>
+				      	<Button variant="outline-dark" 
+				      					type="submit" 
+				      					size="sm"
+				      					className="button">
+								Add
+								</Button>
+							</Col>
+						</Row>
 		      </Form>
 
 				)}

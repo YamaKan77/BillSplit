@@ -6,8 +6,9 @@ const path = __dirname + '/build/';
 const app = express();
 
 var corsOptions = {
-  // origin: "http://localhost:3000/api"
-  origin: "https://divyup.herokuapp.com"
+  origin: "http://localhost:3000/api"
+  // origin: "http://192.168.0.18:3000/api"
+  // origin: "https://divyup.herokuapp.com"
 };
 
 app.use(express.static(path));
@@ -38,7 +39,7 @@ db.mongoose
   });
 
 // simple route
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path + "index.html");
 });
 
