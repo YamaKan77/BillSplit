@@ -6,9 +6,9 @@ const path = __dirname + '/build/';
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3000/api"
+  // origin: "http://localhost:3000/api"
   // origin: "http://192.168.0.18:3000/api"
-  // origin: "https://divyup.herokuapp.com"
+  origin: "https://divyup.herokuapp.com"
 };
 
 app.use(express.static(path));
