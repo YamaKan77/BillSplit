@@ -35,7 +35,7 @@ export default function InviteUser({handleInviteUser, groupName, handleFileUploa
 		      			autoComplete="off" 
 		      			onSubmit={handleSubmit} 
 		      			id="emailForm">
-		      	<Row>
+		      	<Row className="headerRow">
 		      		<Col xs={5}>
 								<h1 className= "groupNameHeader">
 									{groupName}
@@ -50,7 +50,7 @@ export default function InviteUser({handleInviteUser, groupName, handleFileUploa
 				        	size="sm"
 				        	custom />
 			       	</Col>
-		      		<Col className="idCol" xs={3}>
+		      		<Col className="idCol" >
 				        <Form.Control 
 				        	id="email"
 				        	name="email"
@@ -63,15 +63,13 @@ export default function InviteUser({handleInviteUser, groupName, handleFileUploa
 				        	size="sm"/>
 				        	{errors.email && <div>{errors.email}</div>}
 			       	</Col>
-			       	<Col xs={1}>
-				      	<Button id="invite-button"
-				      					variant="outline-dark" 
-				      					type="submit" 
-				      					className="button"
-				      					size="sm">
-									Invite
-								</Button>
-							</Col>
+			      	<Button id="invite-button"
+			      					variant="outline-dark" 
+			      					type="submit" 
+			      					className="button"
+			      					size="sm">
+								Invite
+							</Button>
 						</Row>
 						<Row>
 

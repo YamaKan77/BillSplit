@@ -76,7 +76,7 @@ $fifthColor: #b23850; /* Red */
 }
 
 .idCol {
-  padding-right: 5px;
+  padding: 0px;
 }
 
 .list-group-item {
@@ -95,6 +95,16 @@ $fifthColor: #b23850; /* Red */
 
 .groupImage {
   height:100%;
+}
+
+.headerRow {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.headerRow .col {
+  padding: 0px;
 }
 
 /* login */

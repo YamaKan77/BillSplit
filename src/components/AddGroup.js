@@ -38,25 +38,25 @@ export default function AddGroup({handleAddGroup}) {
 		      			id="groupForm">
 		      	<Row className="formRow">
 			      	<Col className="formGroupName">
-			        <Form.Control 
-			        	id="groupName"
-			        	name="groupName"
-			        	className="formGroupName"
-			        	type="text" 
-			        	onChange={handleChange}
-			        	onBlur={handleBlur}
-			        	value={values.groupName}
-			        	isValid={!errors.groupName}
-			        	placeholder="Group Name"
-			        	size="sm"/>
-			        	{errors.groupName && <div>{errors.groupName}</div>}
+				        <Form.Control 
+				        	id="groupName"
+				        	name="groupName"
+				        	className="formGroupName"
+				        	type="text" 
+				        	onChange={handleChange}
+				        	onBlur={handleBlur}
+				        	value={values.groupName}
+				        	isValid={!errors.groupName}
+				        	placeholder="Group Name"
+				        	size="sm"/>
+				        	{errors.groupName && <div>{errors.groupName}</div>}
 			      	</Col>
-				      	<Button variant="outline-dark" 
-				      					type="submit" 
-				      					size="sm"
-				      					className="button">
-								Add
-								</Button>
+			      	<Button variant="outline-dark" 
+			      					type="submit" 
+			      					size="sm"
+			      					className="button">
+							Add
+							</Button>
 						</Row>
 		      </Form>
 
