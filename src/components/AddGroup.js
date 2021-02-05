@@ -36,11 +36,12 @@ export default function AddGroup({handleAddGroup}) {
 		      			autoComplete="off" 
 		      			onSubmit={handleSubmit} 
 		      			id="groupForm">
-		      	<Row>
-			      	<Col>
+		      	<Row className="formRow">
+			      	<Col className="formGroupName">
 			        <Form.Control 
 			        	id="groupName"
 			        	name="groupName"
+			        	className="formGroupName"
 			        	type="text" 
 			        	onChange={handleChange}
 			        	onBlur={handleBlur}
@@ -50,14 +51,12 @@ export default function AddGroup({handleAddGroup}) {
 			        	size="sm"/>
 			        	{errors.groupName && <div>{errors.groupName}</div>}
 			      	</Col>
-			      	<Col>
 				      	<Button variant="outline-dark" 
 				      					type="submit" 
 				      					size="sm"
 				      					className="button">
 								Add
 								</Button>
-							</Col>
 						</Row>
 		      </Form>
 

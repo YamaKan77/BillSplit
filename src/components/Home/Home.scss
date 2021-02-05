@@ -17,7 +17,12 @@ $fifthColor: #b23850; /* Red */
 }
 
 .addGroup {
-  margin-left: 10px;
+  height: 100%;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 2;
 }
 
 .addButton {
@@ -25,10 +30,13 @@ $fifthColor: #b23850; /* Red */
 }
 
 .groupName {
-  padding: 10px;
-  margin-top: 10px;
   color: $secondColor;
   font-family: Sarpanch;
+}
+
+.formGroupName{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .groupInput {
@@ -44,16 +52,12 @@ $fifthColor: #b23850; /* Red */
 .groupContainer {
   width: 15rem;
 	justify-content: center;
-  padding-left: 10px;
 }
 
-.addGroup {
-  height: 100%;
-  
-}
 
 .groupNameCol {
   display:flex;
+  height: 5em;
   border-width: 3px;
   border-style: solid;
   border-color: $firstColor;
@@ -83,4 +87,23 @@ $fifthColor: #b23850; /* Red */
 
 .cardGroup {
   width: 85%;
+}
+
+.groupContainer .row .col {
+  padding: 0px;
+}
+
+.appName {
+  margin-bottom: 0px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.buttonCol {
+  flex-basis: 20%;
+}
+
+.formRow{
+  margin: 0px;
 }

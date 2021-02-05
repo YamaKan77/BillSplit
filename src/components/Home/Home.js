@@ -41,7 +41,6 @@ export class Home extends React.Component {
 		let groupName = document.getElementById("groupName").value;
 
 		let groupList = this.state.groupList;
-		groupList.push(groupName);
 
 		let participants = [this.state.user.profile.email];
 
@@ -52,6 +51,7 @@ export class Home extends React.Component {
 			img : "",
 		}
 
+		groupList.push(data);
 		GroupDataService.insert(data).then(response => {
 
 			this.setState({ groupList : groupList });
@@ -66,8 +66,8 @@ export class Home extends React.Component {
 					<Row>
 						<Col md="auto"><img className="icon" src={icon} alt="Logo icon" /></Col>
 						<Col className="groupNameCol">
-								<Col xs={8} className="groupName flex-grow-1"><h1>Divy Up</h1></Col>
-								<Col xs={4} className="addGroup align-content-center"><AddGroup handleAddGroup={this.handleAddGroup} /></Col>
+								<Col className="groupName"><h1 className="appName">Divy Up</h1></Col>
+								<Col className="addGroup"><AddGroup handleAddGroup={this.handleAddGroup} /></Col>
 						</Col>
 						<Col md={2}><Profile /></Col>
 					</Row>
