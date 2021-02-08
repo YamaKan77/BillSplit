@@ -22,6 +22,7 @@ export class Home extends React.Component {
 		};
 		this.getGroupList = this.getGroupList.bind(this);
 		this.handleAddGroup = this.handleAddGroup.bind(this);
+		this.handleDeleteGroup = this.handleDeleteGroup.bind(this);
 	}
 
 	componentDidMount() {
@@ -54,10 +55,20 @@ export class Home extends React.Component {
 		groupList.push(data);
 		GroupDataService.insert(data).then(response => {
 
-			this.setState({ groupList : groupList });
+			this.getGroupList();
 		})
 
 		document.getElementById("emailForm").reset();
+	}
+
+	handleDeleteGroup(group) {
+		let groupList = this.state.groupList;
+		GroupDataService.delete(group._id).then(response => {
+			const index = groupList.indexOf(group);
+			groupList.splice(index, 1);
+			this.setState({ groupList : groupList });
+		})
+
 	}
 
 	render() {
@@ -76,7 +87,7 @@ export class Home extends React.Component {
 							{
 								this.state.groupList.map((group) => (
 									
-										<GroupCard group={group} />
+										<GroupCard group={group} handleDeleteGroup={this.handleDeleteGroup} />
 									
 							))}
 						</CardGroup>

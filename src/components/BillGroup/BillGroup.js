@@ -29,6 +29,7 @@ export class BillGroup extends React.Component {
 		this.handleSplitType = this.handleSplitType.bind(this);
 		this.handleInviteUser = this.handleInviteUser.bind(this);
 		this.handleFileUpload = this.handleFileUpload.bind(this);
+		this.handleDeleteItem = this.handleDeleteItem.bind(this);
 	}
 
 	async componentDidMount() {
@@ -148,7 +149,9 @@ export class BillGroup extends React.Component {
 	async insertBills(newBills) {
 		try {
 
-			BillDataService.insert(newBills);
+			BillDataService.insert(newBills).then(response => {
+				this.getOwedBills();
+			});
 			
 		} catch(error) {
 			console.log(error);
@@ -196,9 +199,8 @@ export class BillGroup extends React.Component {
 		}
 
 		this.insertBills(newBills);
-		this.setState({owedBills : owedBills, totalOwedBills : totalOwedBills});
 
-		document.getElementById("add-bill").reset();
+		document.getElementById("billName").value = "";
 		this.setState({selectedUsers : []});
 	}
 
@@ -272,6 +274,17 @@ export class BillGroup extends React.Component {
 
 	}
 
+	handleDeleteItem(bill) {
+		let owedBills = this.state.owedBills;
+		BillDataService.delete(bill._id).then(response => {
+			const index = owedBills.indexOf(bill);
+			owedBills.splice(index, 1);
+			
+			this.getTotalOwed();
+			this.setState({owedBills : owedBills});
+		})
+
+	}
 
 	render() {
 			return (
@@ -295,7 +308,8 @@ export class BillGroup extends React.Component {
 										 	handleSelectAll={this.handleSelectAll}
 										 	handleSplitType={this.handleSplitType}/>
 						<AllBills className = "col-sm-6"
-												owedBills={this.state.owedBills} />
+											owedBills={this.state.owedBills}
+											handleDeleteItem={this.handleDeleteItem} />
 						<OwedAmount className = "col-sm-3"
 											totalOwedBills = {this.state.totalOwedBills || {}}
 											user = {this.props.user.profile.email || {}} />

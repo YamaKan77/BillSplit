@@ -85,3 +85,19 @@ exports.upload = (req, res, next) => {
   })
   
 }
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Group.findByIdAndRemove(id)
+    .then(data => {
+      res.send({
+        message: "Group deleted."
+      });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete group"
+      });
+    });
+};

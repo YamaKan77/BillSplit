@@ -43,11 +43,6 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Find a single Bill with an id
-exports.findOne = (req, res) => {
-  
-};
-
 // Update a Bill by the id in the request
 exports.update = (req, res) => {
   
@@ -55,10 +50,17 @@ exports.update = (req, res) => {
 
 // Delete a Bill with the specified id in the request
 exports.delete = (req, res) => {
-  
-};
+  const id = req.params.id;
 
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
-  
+  Bill.findByIdAndRemove(id)
+    .then(data => {
+      res.send({
+        message: "Bill deleted."
+      });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete bill"
+      });
+    });
 };

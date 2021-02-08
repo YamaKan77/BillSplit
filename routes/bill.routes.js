@@ -9,5 +9,7 @@ module.exports = app => {
   // Create a new Tutorial
   router.post("/insert", bills.insert);
 
+	router.delete("/:id", bills.delete);
+
   app.use('/api/bills', router);
 };

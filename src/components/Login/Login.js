@@ -86,7 +86,7 @@ export default function Login({ setUser }) {
     				<img className="homeIcon" src={icon}/>
     			</Row>
 	      	<Row>
-	      		<Col className="idCol" xs={3}>
+	      		<Col className="idCol">
 			        <Form.Control 
 			        	id="email"
 			        	name="email"
@@ -95,13 +95,12 @@ export default function Login({ setUser }) {
 			        	onBlur={handleBlur}
 			        	value={values.email}
 			        	isValid={!errors.email}
-			        	placeholder="Email"
-			        	size="sm"/>
+			        	placeholder="Email"/>
 			        	{errors.email && <div>{errors.email}</div>}
 		       	</Col>
 					</Row>
 					<Row>
-						<Col className="idCol" xs={3}>
+						<Col className="idCol">
 			        <Form.Control 
 			        	id="password"
 			        	name="password"
@@ -111,24 +110,21 @@ export default function Login({ setUser }) {
 			        	value={values.password}
 			        	isValid={!errors.password}
 			        	onKeyDown={keyPress}
-			        	placeholder="Password"
-			        	size="sm"/>
+			        	placeholder="Password"/>
 			        	{errors.password && <div>{errors.password}</div>}
 		       	</Col>
 					</Row>
 					<Row>
 		       	<Col>
-			      	<Button id="profile-button"
+			      	<Button id="loginButton"
 			      					type="submit" 
-			      					className="button"
-			      					size="sm">
+			      					className="profile-button">
 			      		Login
 							</Button>
-			      	<Button id="profile-button" 
+			      	<Button id="signUpButton" 
 			      					type="button" 
-			      					className="button"
-			      					onClick={() => {SignUp()}}
-			      					size="sm">
+			      					className="profile-button"
+			      					onClick={() => {SignUp()}}>
 			      		Sign Up
 							</Button>
 						</Col>

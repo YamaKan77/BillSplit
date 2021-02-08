@@ -14,11 +14,11 @@ class BillDataService {
   }
 
   update(id, data) {
-    return http.put(`/bill/${id}`, data);
+    return http.put(`/bills/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/bill/${id}`);
+    return http.delete(`/bills/${id}`);
   }
 
   deleteAll() {

@@ -40,5 +40,7 @@ module.exports = app => {
 
 	router.post('/upload', upload.single('img'), groups.upload);
 
+	router.delete("/:id", groups.delete);
+
   app.use('/api/groups', router);
 };

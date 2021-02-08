@@ -90,7 +90,6 @@ $fifthColor: #b23850; /* Red */
 }
 
 .profile-button {
-  background-color: $secondColor;
 }
 
 .groupImage {
@@ -109,12 +108,17 @@ $fifthColor: #b23850; /* Red */
 
 /* login */
 .loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   min-height: 100vh;
-  max-width: 2000px;
-  margin: auto;
 }
 
 .homeIcon {
   height: 200px;
   width: 200px;
+  margin: auto;
 }
+

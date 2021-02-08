@@ -21,6 +21,9 @@ class GroupDataService {
     return http.post(`/groups/upload`, data);
   }
 
+  delete(id) {
+    return http.delete(`/groups/${id}`);
+  }
 }
 
 export default new GroupDataService();
