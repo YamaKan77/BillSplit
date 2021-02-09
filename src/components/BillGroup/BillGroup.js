@@ -68,9 +68,11 @@ export class BillGroup extends React.Component {
 				let typeMap = totalOwedBills[billForUser][type];
 				// Check if covered person is already added
 				if(!typeMap.has(billToUser)) {
+					
 					typeMap.set(billToUser, parseInt(bill.billAmount));
 				} else {
 					let amount = typeMap.get(billToUser);
+
 					amount += parseInt(bill.billAmount);
 					typeMap.set(billToUser, amount);
 				}
@@ -84,7 +86,7 @@ export class BillGroup extends React.Component {
 					let otherTypeMap = totalOwedBills[billForUser][otherType];
 					if(otherTypeMap.has(billToUser)) {
 						let otherAmount = otherTypeMap.get(billToUser);
-
+						
 						if(otherAmount - bill.billAmount > 0) {
 							otherTypeMap.set(billToUser, otherAmount - bill.billAmount);
 						} else if(otherAmount - bill.billAmount < 0) {
@@ -92,6 +94,7 @@ export class BillGroup extends React.Component {
 
 							typeMap.set(billToUser, parseInt(bill.billAmount) - otherAmount);
 							user[type] = typeMap;
+							otherTypeMap.delete(billToUser);
 						} else {
 							otherTypeMap.delete(billToUser);
 						}
@@ -191,8 +194,6 @@ export class BillGroup extends React.Component {
 										groupName : this.props.match.params.groupName,
 										_partition: 'Bill'
 									};
-
-			this.calculateTotalOwedBills(bill, totalOwedBills, 'covered');
 
 			newBills.push(bill);
 			owedBills.push(bill);

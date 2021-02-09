@@ -90,6 +90,8 @@ $fifthColor: #b23850; /* Red */
 }
 
 .profile-button {
+  color: $thirdColor;
+  background-color: $secondColor;
 }
 
 .groupImage {
@@ -104,6 +106,10 @@ $fifthColor: #b23850; /* Red */
 
 .headerRow .col {
   padding: 0px;
+}
+
+.checkboxValue {
+  color: $secondColor;
 }
 
 /* login */

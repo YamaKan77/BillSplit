@@ -77,7 +77,7 @@ exports.update = (req, res) => {
 
 // Upload image for card overlay
 exports.upload = (req, res, next) => {
-  const url = 'https://' + req.get('host');
+  const url = req.protocol + '://' + req.get('host');
   let condition = { _partition: "Group", groupName: req.body.groupName};
   let img = url + '/public/' + req.file.filename;
   Group.findOneAndUpdate(condition, { img: img}).then(data => {

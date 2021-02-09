@@ -6,9 +6,10 @@ export default function UserList({ users, currentUser, selectedUsers, handleUser
 		<div>
 			{
 				users.map((user) => (
-					<>
 						<div key={user}>
 							<Form.Check
+								className="checkboxValue"
+								id={user}
 								type="checkbox"
 								value={user}
 								onChange={handleUserSelect}
@@ -16,7 +17,6 @@ export default function UserList({ users, currentUser, selectedUsers, handleUser
 								label={user}
 							/>
 						</div>
-					</>
 				))}
 		</div>
 	)
