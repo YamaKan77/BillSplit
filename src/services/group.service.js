@@ -21,6 +21,10 @@ class GroupDataService {
     return http.post(`/groups/upload`, data);
   }
 
+  sign_s3(data) {
+    return http.post(`/groups/sign_s3`, data);
+  }
+
   delete(id) {
     return http.delete(`/groups/${id}`);
   }

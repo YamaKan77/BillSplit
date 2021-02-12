@@ -10,6 +10,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import BillDataService from "../../services/bill.service.js";
 import GroupDataService from "../../services/group.service.js";
 import icon from "../../assets/Divy Up.png";
+import S3FileUpload from 'react-s3';
+import axios from 'axios';
 
 import './BillGroup.scss';
 
@@ -266,11 +268,15 @@ export class BillGroup extends React.Component {
 	}
 
 	handleFileUpload = event => {
-		let file = event.target.files[0];
 
+		let file = event.target.files[0];
+	  let fileName = file.name;
+	  let fileType = file.type;
 		const formData = new FormData();
 		formData.append('img', file);
 		formData.append('groupName', this.props.match.params.groupName);
+		formData.append('fileName', fileName);
+
 		GroupDataService.upload(formData);
 
 	}
@@ -284,7 +290,6 @@ export class BillGroup extends React.Component {
 			this.getTotalOwed();
 			this.setState({owedBills : owedBills});
 		})
-
 	}
 
 	render() {
@@ -295,7 +300,7 @@ export class BillGroup extends React.Component {
 						<Col className = "groupNameContainer">
 							<InviteUser groupName={this.props.match.params.groupName} 
 													handleInviteUser={this.handleInviteUser}
-													handleFileUpload={this.handleFileUpload}   />
+													handleFileUpload={this.handleFileUpload} />
 						</Col>
 						<Col md="auto"><Profile /></Col>
 					</Row>

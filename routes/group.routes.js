@@ -4,21 +4,30 @@ module.exports = app => {
 
   let router = require("express").Router();
 	let multer = require('multer');
-	let { v4: uuidv4 } = require('uuid');
-	const DIR = './public/';
+	let aws = require('aws-sdk');
+	let multerS3 = require('multer-s3');
 
-	const storage = multer.diskStorage({
-		destination: (req, file, cb) => {
-			cb(null, DIR);
-		},
-		filename: (req, file, cb) => {
-			const fileName = file.originalname.toLowerCase().split(' ').join('-');
-			cb(null, uuidv4() + '-' + fileName); 
-		}
-	});
+	require('dotenv').config();
+	let s3 = new aws.S3({
+	    region: 'us-west-1',
+	    accessKeyId: process.env.AWSAccessKeyId,
+	    secretAccessKey: process.env.AWSSecretKey,
+	    signatureVersion: 'v4'
+	  });
 
 	var upload = multer({
-		storage: storage,
+		storage: multerS3({
+			acl: "public-read",
+			s3: s3,
+			bucket: process.env.Bucket,
+			metadata: function (req, file, cb) {
+				cb(null, {fieldName: file.originalname});
+			},
+			key: function (req, file, cb) {
+				cb(null, file.originalname)
+			}
+
+		}),
 		fileFilter: (req, file, cb) => {
 			if(file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
 				cb(null, true);

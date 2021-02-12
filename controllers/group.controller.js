@@ -1,5 +1,7 @@
 const db = require("../models");
 const Group = db.groups;
+var aws = require('aws-sdk');
+require('dotenv').config();
 
 // Create and Save a new Bill
 exports.insert = (req, res) => {
@@ -77,13 +79,12 @@ exports.update = (req, res) => {
 
 // Upload image for card overlay
 exports.upload = (req, res, next) => {
-  const url = req.protocol + 's://' + req.get('host');
   let condition = { _partition: "Group", groupName: req.body.groupName};
-  let img = url + '/public/' + req.file.filename;
+  // Location of S3 location, find way to pass as variable 
+  let img = "https://divyupbucket.s3-us-west-1.amazonaws.com/" + req.body.fileName;
   Group.findOneAndUpdate(condition, { img: img}).then(data => {
     res.send(data);
   })
-  
 }
 
 exports.delete = (req, res) => {
